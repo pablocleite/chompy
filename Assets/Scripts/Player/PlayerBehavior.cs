@@ -10,6 +10,8 @@ namespace Player
         
         protected PlayerStats _playerStats = new PlayerStats(1);
         
+        public int Size => _playerStats.Size;
+        
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log($"Collided with {other.tag}");
