@@ -29,6 +29,10 @@ public class EnemyController : PlayerBehavior
 
         if (this.Size <= playerObject.Size)
         {
+            // Method below is expensive and could benefit from different approaches, like
+            // Become aware of all pills in the field and receive notification when a pill is consumed
+            // Recalculating the route only when needed. Also enemy should not be able to "see" the entire board
+            // as its like it's cheating so a max distance radius should be applied and it should chase food instead
             var nearestPill = FindNearestPill();
             destination = nearestPill?.transform.position ?? Vector3.zero;
         }
@@ -44,6 +48,7 @@ public class EnemyController : PlayerBehavior
     private GameObject FindNearestPill()
     {
         var pills = GameObject.FindGameObjectsWithTag("Pill");
+        
         if (pills.Length == 0) { return null; }
         
         GameObject nearest = null;
